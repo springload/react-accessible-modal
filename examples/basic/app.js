@@ -1,7 +1,7 @@
 import React from 'react';
 import Modal from '../../lib/index';
 
-let App = React.createClass({
+const App = React.createClass({
   render() {
     return (
       <div className="example">

@@ -1,6 +1,4 @@
 {
-    "extends": "airbnb/base",
-
     "rules": {
         "indent": [2, 4],
         "no-warning-comments": [1, { "terms": ["todo", "fixme", "xxx"], "location": "start" }],
