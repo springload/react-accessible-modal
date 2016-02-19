@@ -27,12 +27,12 @@ const App = React.createClass({
         return (
             <div className="example">
                 <h1>React Modal example</h1>
-                <p onClick={this.openModal}>Open modal</p>
+                <a onClick={this.openModal}>Open modal</a>
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onRequestClose={this.closeModal}
                     className={"modal--slideshow"}
-                    overlayClick={false}
+                    overlayClick={true}
                 >
                     <div className="modal__slideshow-inner">
                         <div className="modal__slideshow-wrapper">
