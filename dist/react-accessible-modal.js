@@ -141,13 +141,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        // Focus needs to be set when mounting and already open
 	        if (this.props.isOpen) {
 	            this.open();
-	            window.addEventListener('keydown', this.handleKeyDown);
 	        }
 	    },
 	
-	    componentWillUnmount: function componentWillUnmount() {
-	        window.removeEventListener('keydown', this.handleKeyDown);
-	    },
+	    componentWillUnmount: function componentWillUnmount() {},
 	
 	    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
 	        // Focus only needs to be set once when the modal is being opened
@@ -163,7 +160,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        this.setAriaHidden(false);
 	        this.setFocusTrap();
 	
-	        this.setState({ afterOpen: true });
+	        this.setState({ afterOpen: true }, function () {
+	            window.addEventListener('keydown', this.handleKeyDown);
+	        });
 	    },
 	
 	    requestClose: function requestClose() {
@@ -220,6 +219,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    afterClose: function afterClose() {
 	        _focusTrap2['default'].deactivate(this.refs.modal);
+	        window.removeEventListener('keydown', this.handleKeyDown);
+	
 	        this.props.onAfterClose();
 	    },
 	
@@ -252,6 +253,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	            return;
 	        }
 	
+	        if (!content) {
+	            return;
+	        }
+	
 	        content.setAttribute('aria-hidden', isHidden);
 	
 	        var mainContent = document.querySelector('[data-main-content]');
@@ -264,6 +269,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var _refs = this.refs;
 	        var modal = _refs.modal;
 	        var content = _refs.content;
+	
+	        if (!content) {
+	            return;
+	        }
 	
 	        var tabbableItems = (0, _tabbable2['default'])(content);
 	        if (tabbableItems.length > 0) {
@@ -299,8 +308,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                    _react2['default'].createElement(
 	                        'div',
 	                        {
-	                            className: 'modal__content',
 	                            ref: 'content',
+	                            className: 'modal__content',
 	                            onClick: stopPropagation,
 	                            'aria-label': label,
 	                            'aria-hidden': 'true',

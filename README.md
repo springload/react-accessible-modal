@@ -15,6 +15,14 @@ You need `rackt-cli v0.5.3` to execute some of these commands.
 - `rackt pages` rebuild gh-pages branch
 
 
+To install our dependencies:
+
+```sh
+npm install --global eslint eslint-plugin-react babel-eslint eslint-config-airbnb sass-lint
+# Then, install all project dependencies.
+npm install
+```
+
 ## Include your modal component
 
 ```js

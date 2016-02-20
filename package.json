@@ -14,6 +14,7 @@
   },
   "scripts": {
     "test": "rackt test --single-run --browsers Firefox",
+    "test2": "rackt test --browsers Chrome",
     "start": "rackt server",
     "build": "rackt build"
   },
@@ -23,15 +24,17 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "babel-eslint": "^4.1.6",
     "chai": "^3.4.0",
-    "escope": "^3.3.0",
+    "escope": "3.3.0",
     "rackt-cli": "^0.5.4",
-    "react": "^0.14.6",
     "react-addons-test-utils": "^0.14.6"
   },
-  "peerDependencies": {
+  "dependencies": {
     "react": "^0.14.6",
-    "react-dom": "^0.14.6"
+    "react-dom": "^0.14.6",
+    "focus-trap": "^1.0.2",
+    "tabbable": "^1.0.0"
   },
   "tags": [
     "react",
@@ -42,9 +45,5 @@
     "react",
     "react-component",
     "modal"
-  ],
-  "dependencies": {
-    "focus-trap": "^1.0.2",
-    "tabbable": "^1.0.0"
-  }
+  ]
 }
