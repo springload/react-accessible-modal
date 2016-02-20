@@ -14,7 +14,7 @@
   },
   "scripts": {
     "test": "rackt test --single-run --browsers Firefox",
-    "test2": "rackt test --browsers Chrome",
+    "pages": "rackt pages",
     "start": "rackt server",
     "build": "rackt build"
   },
