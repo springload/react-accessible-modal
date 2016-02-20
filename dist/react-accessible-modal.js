@@ -102,7 +102,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    event.stopPropagation();
 	}
 	
-	var Modal = _react2['default'].createClass({
+	exports['default'] = _react2['default'].createClass({
+	
 	    displayName: 'Modal',
 	
 	    propTypes: {
@@ -336,8 +337,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	        );
 	    }
 	});
-	
-	exports['default'] = Modal;
 	module.exports = exports['default'];
 
 /***/ },
