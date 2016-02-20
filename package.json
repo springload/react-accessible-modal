@@ -1,6 +1,6 @@
 {
   "name": "react-accessible-modal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "React accessible modal component",
   "main": "./lib/index.js",
   "repository": {
@@ -16,6 +16,7 @@
     "test": "rackt test --single-run --browsers Firefox",
     "pages": "rackt pages",
     "start": "rackt server",
+    "release": "rackt release",
     "build": "rackt build"
   },
   "authors": [

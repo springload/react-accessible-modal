@@ -1,6 +1,6 @@
 {
   "name": "react-accessible-modal",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/springload/react-accessible-modal",
   "authors": [
     "Thomas Winter",
@@ -9,7 +9,9 @@
   "description": "React accessible modal component",
   "main": "dist/react-accessible-modal.js",
   "keywords": [
-    "react", "react-component", "modal"
+    "react",
+    "react-component",
+    "modal"
   ],
   "license": "MIT",
   "ignore": [
