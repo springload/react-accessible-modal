@@ -277,7 +277,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        var tabbableItems = (0, _tabbable2['default'])(content);
 	        if (tabbableItems.length > 0) {
-	            _focusTrap2['default'].activate(modal);
+	            _focusTrap2['default'].activate(modal, {
+	                initialFocus: 'a'
+	            });
 	        }
 	    },
 	
