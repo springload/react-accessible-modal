@@ -201,9 +201,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var modal = this.refs.modal;
 	
 	        // make sure we're listening to the modals animationEvent
-	        var target = e.target || e.srcElement;
-	        if (e && target !== modal) {
-	            return;
+	        if (e) {
+	            var target = e.target || e.srcElement;
+	            if (target !== modal) {
+	                return;
+	            }
 	        }
 	
 	        this.setAriaHidden(true);
@@ -361,13 +363,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function activate(element, options) {
 	  // There can be only one focus trap at a time
-	  if (activeFocusTrap) deactivate();
+	  if (activeFocusTrap) deactivate({ returnFocus: false });
 	  activeFocusTrap = true;
 	
 	  trap = (typeof element === 'string')
 	    ? document.querySelector(element)
 	    : element;
+	
 	  config = options || {};
+	
 	  previouslyFocused = document.activeElement;
 	
 	  updateTabbableNodes();
@@ -376,6 +380,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  document.addEventListener('focus', checkFocus, true);
 	  document.addEventListener('click', checkClick, true);
+	  document.addEventListener('mousedown', checkClickInit, true);
+	  document.addEventListener('touchstart', checkClickInit, true);
 	  document.addEventListener('keydown', checkKey, true);
 	}
 	
@@ -401,31 +407,46 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return node;
 	}
 	
-	function deactivate() {
+	function deactivate(deactivationOptions) {
+	  deactivationOptions = deactivationOptions || {};
 	  if (!activeFocusTrap) return;
 	  activeFocusTrap = false;
 	
 	  document.removeEventListener('focus', checkFocus, true);
 	  document.removeEventListener('click', checkClick, true);
+	  document.addEventListener('mousedown', checkClickInit, true);
+	  document.addEventListener('touchstart', checkClickInit, true);
 	  document.removeEventListener('keydown', checkKey, true);
 	
 	  if (config.onDeactivate) config.onDeactivate();
 	
-	  setTimeout(function() {
-	    tryFocus(previouslyFocused);
-	  }, 0);
+	  if (deactivationOptions.returnFocus !== false) {
+	    setTimeout(function() {
+	      tryFocus(previouslyFocused);
+	    }, 0);
+	  }
+	}
+	
+	// This needs to be done on mousedown and touchstart instead of click
+	// so that it precedes the focus event
+	function checkClickInit(e) {
+	  if (config.clickOutsideDeactivates) {
+	    deactivate({ returnFocus: false });
+	  }
 	}
 	
 	function checkClick(e) {
+	  if (config.clickOutsideDeactivates) return;
 	  if (trap.contains(e.target)) return;
 	  e.preventDefault();
 	  e.stopImmediatePropagation();
 	}
 	
 	function checkFocus(e) {
-	  updateTabbableNodes();
 	  if (trap.contains(e.target)) return;
-	  tryFocus(tabbableNodes[0]);
+	  e.preventDefault();
+	  e.stopImmediatePropagation();
+	  e.target.blur();
 	}
 	
 	function checkKey(e) {
@@ -433,7 +454,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    handleTab(e);
 	  }
 	
-	  if (e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27) {
+	  if (config.escapeDeactivates !== false && isEscapeEvent(e)) {
 	    deactivate();
 	  }
 	}
@@ -469,6 +490,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (node.tagName.toLowerCase() === 'input') {
 	    node.select();
 	  }
+	}
+	
+	function isEscapeEvent(e) {
+	  return e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27;
 	}
 	
 	module.exports = {
