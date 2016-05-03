@@ -107,6 +107,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    displayName: 'Modal',
 	
 	    propTypes: {
+	        children: _react2['default'].PropTypes.node.isRequired,
 	        isOpen: _react2['default'].PropTypes.bool.isRequired,
 	        onRequestClose: _react2['default'].PropTypes.func,
 	        onAfterClose: _react2['default'].PropTypes.func,
@@ -114,19 +115,17 @@ return /******/ (function(modules) { // webpackBootstrap
 	        label: _react2['default'].PropTypes.string,
 	        className: _react2['default'].PropTypes.string,
 	        controls: _react2['default'].PropTypes.object,
-	        children: _react2['default'].PropTypes.object,
 	        ariaHideApp: _react2['default'].PropTypes.bool
 	    },
 	
 	    getDefaultProps: function getDefaultProps() {
 	        return {
-	            isOpen: false,
 	            ariaHideApp: true,
 	            onRequestClose: null,
-	            onAfterClose: function onAfterClose() {},
+	            onAfterClose: null,
 	            overlayClick: true,
 	            className: '',
-	            label: '',
+	            label: null,
 	            controls: null
 	        };
 	    },
@@ -145,7 +144,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    },
 	
-	    componentWillUnmount: function componentWillUnmount() {},
+	    componentWillUnmount: function componentWillUnmount() {
+	        if (this.props.isOpen) {
+	            this.cleanup();
+	        }
+	    },
 	
 	    componentWillReceiveProps: function componentWillReceiveProps(newProps) {
 	        // Focus only needs to be set once when the modal is being opened
@@ -220,11 +223,20 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }, this.afterClose);
 	    },
 	
-	    afterClose: function afterClose() {
+	    cleanup: function cleanup() {
+	        document.body.classList.remove(bodyActiveClass);
 	        _focusTrap2['default'].deactivate(this.refs.modal);
 	        window.removeEventListener('keydown', this.handleKeyDown);
+	    },
 	
-	        this.props.onAfterClose();
+	    afterClose: function afterClose() {
+	        var onAfterClose = this.props.onAfterClose;
+	
+	        this.cleanup();
+	
+	        if (onAfterClose) {
+	            onAfterClose();
+	        }
 	    },
 	
 	    handleKeyDown: function handleKeyDown(e) {
