@@ -110,6 +110,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        children: _react2['default'].PropTypes.node.isRequired,
 	        isOpen: _react2['default'].PropTypes.bool.isRequired,
 	        onRequestClose: _react2['default'].PropTypes.func,
+	        onAfterOpen: _react2['default'].PropTypes.func,
 	        onAfterClose: _react2['default'].PropTypes.func,
 	        overlayClick: _react2['default'].PropTypes.bool,
 	        label: _react2['default'].PropTypes.string,
@@ -122,6 +123,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        return {
 	            ariaHideApp: true,
 	            onRequestClose: null,
+	            onAfterOpen: null,
 	            onAfterClose: null,
 	            overlayClick: true,
 	            className: '',
@@ -132,7 +134,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    getInitialState: function getInitialState() {
 	        return {
-	            afterOpen: false,
+	            // afterOpen: false,
 	            beforeClose: false
 	        };
 	    },
@@ -161,11 +163,37 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	    open: function open() {
 	        document.body.classList.add(bodyActiveClass);
+	
+	        if (animationEvent) {
+	            var modal = this.refs.modal;
+	            modal.addEventListener(animationEvent, this.afterOpen);
+	            return;
+	        }
+	
+	        this.afterOpen();
+	    },
+	
+	    afterOpen: function afterOpen(e) {
+	        var modal = this.refs.modal;
+	
+	        // make sure we're listening to the modals animationEvent
+	        if (e) {
+	            var target = e.target || e.srcElement;
+	            if (target !== modal) {
+	                return;
+	            }
+	        }
+	
 	        this.setAriaHidden(false);
 	        this.setFocusTrap();
 	
+	        if (animationEvent) {
+	            modal.removeEventListener(animationEvent, this.afterOpen);
+	        }
+	
 	        this.setState({ afterOpen: true }, function () {
 	            window.addEventListener('keydown', this.handleKeyDown);
+	            this.props.onAfterOpen();
 	        });
 	    },
 	
@@ -291,9 +319,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        var tabbableItems = (0, _tabbable2['default'])(content);
 	        if (tabbableItems.length > 0) {
-	            _focusTrap2['default'].activate(modal, {
-	                initialFocus: 'a'
-	            });
+	            _focusTrap2['default'].activate(modal);
 	        }
 	    },
 	
@@ -341,7 +367,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	                { className: 'modal__control' },
 	                _react2['default'].createElement(
 	                    'div',
-	                    { className: 'modal__control-item modal__close', onClick: this.requestClose },
+	                    { className: 'modal__control-item modal__close', onClick: this.requestClose, tabIndex: '0' },
 	                    '×'
 	                )
 	            ),
@@ -375,15 +401,13 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	function activate(element, options) {
 	  // There can be only one focus trap at a time
-	  if (activeFocusTrap) deactivate({ returnFocus: false });
+	  if (activeFocusTrap) deactivate();
 	  activeFocusTrap = true;
 	
 	  trap = (typeof element === 'string')
 	    ? document.querySelector(element)
 	    : element;
-	
 	  config = options || {};
-	
 	  previouslyFocused = document.activeElement;
 	
 	  updateTabbableNodes();
@@ -392,8 +416,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  document.addEventListener('focus', checkFocus, true);
 	  document.addEventListener('click', checkClick, true);
-	  document.addEventListener('mousedown', checkClickInit, true);
-	  document.addEventListener('touchstart', checkClickInit, true);
 	  document.addEventListener('keydown', checkKey, true);
 	}
 	
@@ -419,46 +441,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return node;
 	}
 	
-	function deactivate(deactivationOptions) {
-	  deactivationOptions = deactivationOptions || {};
+	function deactivate() {
 	  if (!activeFocusTrap) return;
 	  activeFocusTrap = false;
 	
 	  document.removeEventListener('focus', checkFocus, true);
 	  document.removeEventListener('click', checkClick, true);
-	  document.addEventListener('mousedown', checkClickInit, true);
-	  document.addEventListener('touchstart', checkClickInit, true);
 	  document.removeEventListener('keydown', checkKey, true);
 	
 	  if (config.onDeactivate) config.onDeactivate();
 	
-	  if (deactivationOptions.returnFocus !== false) {
-	    setTimeout(function() {
-	      tryFocus(previouslyFocused);
-	    }, 0);
-	  }
-	}
-	
-	// This needs to be done on mousedown and touchstart instead of click
-	// so that it precedes the focus event
-	function checkClickInit(e) {
-	  if (config.clickOutsideDeactivates) {
-	    deactivate({ returnFocus: false });
-	  }
+	  setTimeout(function() {
+	    tryFocus(previouslyFocused);
+	  }, 0);
 	}
 	
 	function checkClick(e) {
-	  if (config.clickOutsideDeactivates) return;
 	  if (trap.contains(e.target)) return;
 	  e.preventDefault();
 	  e.stopImmediatePropagation();
 	}
 	
 	function checkFocus(e) {
+	  updateTabbableNodes();
 	  if (trap.contains(e.target)) return;
-	  e.preventDefault();
-	  e.stopImmediatePropagation();
-	  e.target.blur();
+	  tryFocus(tabbableNodes[0]);
 	}
 	
 	function checkKey(e) {
@@ -466,7 +473,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    handleTab(e);
 	  }
 	
-	  if (config.escapeDeactivates !== false && isEscapeEvent(e)) {
+	  if (e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27) {
 	    deactivate();
 	  }
 	}
@@ -502,10 +509,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  if (node.tagName.toLowerCase() === 'input') {
 	    node.select();
 	  }
-	}
-	
-	function isEscapeEvent(e) {
-	  return e.key === 'Escape' || e.key === 'Esc' || e.keyCode === 27;
 	}
 	
 	module.exports = {
