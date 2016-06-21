@@ -1,6 +1,6 @@
 {
   "name": "react-accessible-modal",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "description": "React accessible modal component",
   "main": "./lib/index.js",
   "repository": {
