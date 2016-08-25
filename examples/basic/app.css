@@ -135,6 +135,14 @@ $color-dark-grey: #222;
 }
 
 
+.modal__control--inside .modal__close {
+  top: -2rem;
+  right: -2rem;
+  border-radius: 100%;
+  animation: affordance-in .5s cubic-bezier(.075, .82, .165, 0) .25s backwards;
+}
+
+
 
 /**
  * Animation keyframes

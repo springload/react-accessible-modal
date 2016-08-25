@@ -7,7 +7,8 @@ const App = React.createClass({
 
   getInitialState() {
     return {
-      modalIsOpen: false
+      modalIsOpen: false,
+      modalAltIsOpen: false
     };
   },
 
@@ -15,11 +16,29 @@ const App = React.createClass({
     return (
       <div className="example">
         <h1>React Modal example</h1>
-        <a onClick={this.openModal}>Open modal</a>
+        <p>
+          <a onClick={() => this.openModal('modalIsOpen')}>Open modal</a>
+        </p>
+        <p>
+          <a onClick={() => this.openModal('modalAltIsOpen')}>Open alternative modal</a>
+        </p>
         <Modal
           isOpen={this.state.modalIsOpen}
-          onRequestClose={this.closeModal}
+          onRequestClose={() => this.closeModal('modalIsOpen')}
           className={"modal--slideshow"}
+          overlayClick
+        >
+          <div className="modal__slideshow-inner">
+            <div className="modal__slideshow-wrapper">
+              <h1>Oh, hello!</h1>
+            </div>
+          </div>
+        </Modal>
+        <Modal
+          isOpen={this.state.modalAltIsOpen}
+          onRequestClose={() => this.closeModal('modalAltIsOpen')}
+          className={"modal--slideshow"}
+          insideControls
           overlayClick
         >
           <div className="modal__slideshow-inner">
@@ -32,18 +51,18 @@ const App = React.createClass({
     );
   },
 
-  openModal() {
+  openModal(item) {
     this.setState({
-      modalIsOpen: true
+      [item]: true
     });
   },
 
-  closeModal() {
+
+  closeModal(item) {
     this.setState({
-      modalIsOpen: false
+      [item]: false
     });
   }
-
 
 });
 
