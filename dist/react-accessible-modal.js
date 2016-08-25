@@ -112,6 +112,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        label: _react2['default'].PropTypes.string,
 	        className: _react2['default'].PropTypes.string,
 	        controls: _react2['default'].PropTypes.object,
+	        insideControls: _react2['default'].PropTypes.bool,
 	        ariaHideApp: _react2['default'].PropTypes.bool
 	    },
 	
@@ -124,7 +125,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	            overlayClick: true,
 	            className: '',
 	            label: null,
-	            controls: null
+	            controls: null,
+	            insideControls: false
 	        };
 	    },
 	
@@ -331,8 +333,25 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var children = _props.children;
 	        var controls = _props.controls;
 	        var label = _props.label;
+	        var insideControls = _props.insideControls;
 	
 	        var classList = ['modal', 'modal--active'];
+	
+	        var controlsMarkup = undefined;
+	
+	        if (controls) {
+	            controlsMarkup = controls;
+	        } else {
+	            controlsMarkup = _react2['default'].createElement(
+	                'div',
+	                { className: 'modal__control' + (insideControls ? ' modal__control--inside' : '') },
+	                _react2['default'].createElement(
+	                    'div',
+	                    { className: 'modal__control-item modal__close', onClick: this.requestClose, tabIndex: '0' },
+	                    '×'
+	                )
+	            );
+	        }hh;
 	
 	        if (className) {
 	            classList.push(className);
@@ -360,19 +379,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            'aria-hidden': 'true',
 	                            role: 'dialog'
 	                        },
-	                        children
+	                        children,
+	                        insideControls && controlsMarkup
 	                    )
 	                )
 	            ),
-	            controls ? controls : _react2['default'].createElement(
-	                'div',
-	                { className: 'modal__control' },
-	                _react2['default'].createElement(
-	                    'div',
-	                    { className: 'modal__control-item modal__close', onClick: this.requestClose, tabIndex: '0' },
-	                    '×'
-	                )
-	            ),
+	            !insideControls && controlsMarkup,
 	            _react2['default'].createElement('div', {
 	                className: 'modal__overlay',
 	                tabIndex: '-1',
@@ -549,9 +561,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	module.exports = function(el) {
 	  var basicTabbables = [];
 	  var orderedTabbables = [];
+	  var isHidden = createIsHidden();
 	
-	  var candidateNodelist = el.querySelectorAll('input, select, a, textarea, button, [tabindex]');
-	  var candidates = Array.prototype.slice.call(candidateNodelist);
+	  var candidates = el.querySelectorAll('input, select, a[href], textarea, button, [tabindex]');
 	
 	  var candidate, candidateIndex;
 	  for (var i = 0, l = candidates.length; i < l; i++) {
@@ -561,7 +573,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (
 	      candidateIndex < 0
 	      || (candidate.tagName === 'INPUT' && candidate.type === 'hidden')
-	      || (candidate.tagName === 'A' && !candidate.href && !candidate.tabIndex)
 	      || candidate.disabled
 	      || isHidden(candidate)
 	    ) {
@@ -591,30 +602,31 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return tabbableNodes;
 	}
 	
-	var nodeCache = {};
-	var nodeCacheIndex = 1;
-	function isHidden(node) {
-	  if (node === document.documentElement) {
-	    return false;
+	function createIsHidden() {
+	  // Node cache must be refreshed on every check, in case
+	  // the content of the element has changed
+	  var nodeCache = [];
+	
+	  return function isHidden(node) {
+	    if (node === document.documentElement) return false;
+	
+	    // Find the cached node (Array.prototype.find not available in IE9)
+	    for (var i = 0, length = nodeCache.length; i < length; i++) {
+	      if (nodeCache[i][0] === node) return nodeCache[i][1];
+	    }
+	
+	    var result = false;
+	    var style = window.getComputedStyle(node);
+	    if (style.visibility === 'hidden' || style.display === 'none') {
+	      result = true;
+	    } else if (node.parentNode) {
+	      result = isHidden(node.parentNode);
+	    }
+	
+	    nodeCache.push([node, result]);
+	
+	    return result;
 	  }
-	
-	  if (node.tabbableCacheIndex) {
-	    return nodeCache[node.tabbableCacheIndex];
-	  }
-	
-	  var result = false;
-	  var style = window.getComputedStyle(node);
-	  if (style.visibility === 'hidden' || style.display === 'none') {
-	    result = true;
-	  } else if (node.parentNode) {
-	    result = isHidden(node.parentNode);
-	  }
-	
-	  node.tabbableCacheIndex = nodeCacheIndex;
-	  nodeCache[node.tabbableCacheIndex] = result;
-	  nodeCacheIndex++;
-	
-	  return result;
 	}
 
 
