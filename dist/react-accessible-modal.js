@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("React"));
+		module.exports = factory(require("React"), require("ReactDOM"));
 	else if(typeof define === 'function' && define.amd)
-		define(["React"], factory);
+		define(["React", "ReactDOM"], factory);
 	else if(typeof exports === 'object')
-		exports["ReactAccessibleModal"] = factory(require("React"));
+		exports["ReactAccessibleModal"] = factory(require("React"), require("ReactDOM"));
 	else
-		root["ReactAccessibleModal"] = factory(root["React"]);
-})(this, function(__WEBPACK_EXTERNAL_MODULE_2__) {
+		root["ReactAccessibleModal"] = factory(root["React"], root["ReactDOM"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__, __WEBPACK_EXTERNAL_MODULE_3__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -85,11 +85,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _focusTrap = __webpack_require__(3);
+	var _reactDom = __webpack_require__(3);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _focusTrap = __webpack_require__(4);
 	
 	var _focusTrap2 = _interopRequireDefault(_focusTrap);
 	
-	var _utils = __webpack_require__(5);
+	var _utils = __webpack_require__(6);
 	
 	var bodyActiveClass = 'u-body-modal-active';
 	var animationEvent = (0, _utils.whichAnimationEvent)();
@@ -322,6 +326,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	
 	        _focusTrap2['default'].activate(modal, {
+	            initialFocus: _reactDom2['default'].findDOMNode(content),
 	            clickOutsideDeactivates: true,
 	            returnFocusOnDeactivate: true
 	        });
@@ -347,11 +352,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	                { className: 'modal__control' + (insideControls ? ' modal__control--inside' : '') },
 	                _react2['default'].createElement(
 	                    'div',
-	                    { className: 'modal__control-item modal__close', onClick: this.requestClose, tabIndex: '0' },
+	                    { className: 'modal__control-item modal__close', role: 'button', tabIndex: '0', onClick: this.requestClose, tabIndex: '0' },
 	                    '×'
 	                )
 	            );
-	        }hh;
+	        }
 	
 	        if (className) {
 	            classList.push(className);
@@ -379,8 +384,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            'aria-hidden': 'true',
 	                            role: 'dialog'
 	                        },
-	                        children,
-	                        insideControls && controlsMarkup
+	                        insideControls && controlsMarkup,
+	                        children
 	                    )
 	                )
 	            ),
@@ -403,9 +408,15 @@ return /******/ (function(modules) { // webpackBootstrap
 
 /***/ },
 /* 3 */
+/***/ function(module, exports) {
+
+	module.exports = __WEBPACK_EXTERNAL_MODULE_3__;
+
+/***/ },
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var tabbable = __webpack_require__(4);
+	var tabbable = __webpack_require__(5);
 	
 	var trap;
 	var tabbableNodes;
@@ -555,7 +566,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports) {
 
 	module.exports = function(el) {
@@ -631,7 +642,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports) {
 
 	'use strict';
