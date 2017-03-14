@@ -84,3 +84,25 @@ const LoginModal = React.createClass({
 });
 
 export default LoginModal;
+
+export const initForms = () => {
+    const modalContainer = document.querySelector('[data-modal]');
+    const formModal = querySelectArray('[data-form-modal]');
+
+
+    const formModalClick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        ReactDOM.render(
+            <FormModal
+                isOpen={true}
+                modalContainer={modalContainer}
+            />, modalContainer
+        );
+    };
+
+    formModal.forEach((item) => {
+        item.addEventListener('click', formModalClick, false);
+    });
+};
