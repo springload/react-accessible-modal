@@ -98,3 +98,42 @@ const VideoModal = React.createClass({
 });
 
 export default VideoModal;
+
+export const initVideos = () => {
+    const modalContainer = document.querySelector('[data-modal]');
+    const videos = querySelectArray('[data-video-id]');
+
+    const videoClick = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        let videoId = e.currentTarget.getAttribute('data-video-id');
+
+        // Account for different video formats
+        if (videoId.match(/watch\?v=/)) {
+            videoId = videoId.split('v=', 2)[1];
+        } else if (videoId.match(/\.be\/.+/)) {
+            videoId = videoId.split('.be/')[1];
+        }
+
+        ReactDOM.render(
+            <VideoModal
+                isOpen={true}
+                videoId={videoId}
+                modalContainer={modalContainer}
+            />, modalContainer
+        );
+    };
+
+    const videoKeyDown = (e) => {
+        // Enter key
+        if (e.keyCode === 13) {
+            videoClick(e);
+        }
+    };
+
+    videos.forEach((item) => {
+        item.addEventListener('click', videoClick, false);
+        item.addEventListener('keydown', videoKeyDown, false);
+    });
+};
