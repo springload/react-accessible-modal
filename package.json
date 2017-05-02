@@ -3,25 +3,19 @@
   "version": "1.1.4",
   "description": "React accessible modal component",
   "main": "./lib/index.js",
+  "author": "Springload",
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "react-component",
+    "modal"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/springload/react-accessible-modal.git"
   },
-  "homepage": "https://github.com/springload/react-accessible-modal",
+  "homepage": "https://springload.github.io/react-accessible-modal",
   "bugs": "https://github.com/springload/react-accessible-modal/issues",
-  "directories": {
-    "example": "examples"
-  },
-  "scripts": {
-    "test": "rackt test --single-run --browsers Firefox || true",
-    "start": "rackt server",
-    "build": "rackt build"
-  },
-  "authors": [
-    "Thomas Winter",
-    "Josh Barr"
-  ],
-  "license": "MIT",
   "devDependencies": {
     "babel-eslint": "^4.1.6",
     "chai": "^3.4.0",
@@ -38,14 +32,9 @@
     "react": "^0.14.7 || ^15.0.1 || ^15.1.0",
     "react-dom": "^0.14.7 || ^15.0.1  || ^15.1.0"
   },
-  "tags": [
-    "react",
-    "react-component",
-    "modal"
-  ],
-  "keywords": [
-    "react",
-    "react-component",
-    "modal"
-  ]
+  "scripts": {
+    "test": "rackt test --single-run --browsers Firefox",
+    "start": "rackt server",
+    "build": "rackt build"
+  }
 }
