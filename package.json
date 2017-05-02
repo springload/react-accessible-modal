@@ -19,6 +19,17 @@
   "eslintConfig": {
     "extends": "springload"
   },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/dist/",
+      "/pages/",
+      "/examples/test.js"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  },
   "babel": {
     "presets": [
       [

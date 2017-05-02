@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Modal #isOpen 1`] = `
+<div
+  className="modal modal--active "
+>
+  <div
+    className="modal__table"
+  >
+    <div
+      className="modal__center"
+    >
+      <div
+        aria-hidden="true"
+        aria-label={null}
+        className="modal__content"
+        onClick={[Function]}
+        role="dialog"
+      >
+        Test
+      </div>
+    </div>
+  </div>
+  <div
+    className="modal__control"
+  >
+    <div
+      className="modal__control-item modal__close"
+      onClick={[Function]}
+      role="button"
+      tabIndex="0"
+    >
+      ×
+    </div>
+  </div>
+  <div
+    className="modal__overlay"
+    onClick={[Function]}
+    tabIndex="-1"
+  />
+</div>
+`;
+
+exports[`Modal renders 1`] = `null`;
