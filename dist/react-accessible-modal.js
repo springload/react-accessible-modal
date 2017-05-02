@@ -180,7 +180,11 @@ return /******/ (function(modules) { // webpackBootstrap
 	    },
 	
 	    afterOpen: function afterOpen(e) {
+	        var _this = this;
+	
 	        var modal = this.refs.modal;
+	
+	        this.closeButton = modal.querySelector('.modal__close');
 	
 	        // make sure we're listening to the modals animationEvent
 	        if (e) {
@@ -198,9 +202,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	
 	        this.setState({ afterOpen: true }, function () {
-	            window.addEventListener('keydown', this.handleKeyDown);
-	            if (this.props.onAfterOpen) {
-	                this.props.onAfterOpen();
+	            window.addEventListener('keydown', _this.handleEscapeKeyDown);
+	            _this.closeButton.addEventListener('keydown', _this.handleEnterKeyDown);
+	            if (_this.props.onAfterOpen) {
+	                _this.props.onAfterOpen();
 	            }
 	        });
 	    },
@@ -262,7 +267,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	    cleanup: function cleanup() {
 	        document.body.classList.remove(bodyActiveClass);
 	        _focusTrap2['default'].deactivate(this.refs.modal);
-	        window.removeEventListener('keydown', this.handleKeyDown);
+	        window.removeEventListener('keydown', this.handleEscapeKeyDown);
+	        this.closeButton.removeEventListener('keydown', this.handleEnterKeyDown);
 	    },
 	
 	    afterClose: function afterClose() {
@@ -275,9 +281,16 @@ return /******/ (function(modules) { // webpackBootstrap
 	        }
 	    },
 	
-	    handleKeyDown: function handleKeyDown(e) {
+	    handleEscapeKeyDown: function handleEscapeKeyDown(e) {
 	        // ESC key
 	        if (e.keyCode === 27) {
+	            this.requestClose();
+	        }
+	    },
+	
+	    handleEnterKeyDown: function handleEnterKeyDown(e) {
+	        // Enter key
+	        if (e.keyCode === 13) {
 	            this.requestClose();
 	        }
 	    },
@@ -384,8 +397,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	                            'aria-hidden': 'true',
 	                            role: 'dialog'
 	                        },
-	                        insideControls && controlsMarkup,
-	                        children
+	                        children,
+	                        insideControls && controlsMarkup
 	                    )
 	                )
 	            ),
