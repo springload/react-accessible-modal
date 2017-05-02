@@ -14,8 +14,7 @@ const App = React.createClass({
 
   render() {
     return (
-      <div className="example">
-        <h1>React Modal example</h1>
+      <div>
         <p>
           <a href="#" onClick={() => this.openModal('modalIsOpen')}>Open modal</a>
         </p>
