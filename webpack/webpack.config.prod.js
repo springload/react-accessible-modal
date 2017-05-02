@@ -2,7 +2,6 @@ const path = require('path');
 const webpack = require('webpack');
 const config = require('./webpack.config.dev');
 
-config.devServer = null;
 config.watch = false;
 config.devtool = false;
 config.output.path = path.join(__dirname, '..', 'pages', 'assets');
