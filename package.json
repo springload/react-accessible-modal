@@ -20,16 +20,29 @@
     "extends": "springload"
   },
   "devDependencies": {
-    "chai": "^3.4.0",
+    "babel-cli": "^6.22.2",
+    "babel-jest": "^19.0.0",
+    "babel-loader": "^6.2.10",
+    "babel-preset-env": "^1.4.0",
+    "babel-preset-react": "^6.16.0",
+    "coveralls": "^2.11.15",
+    "enzyme": "^2.8.2",
+    "enzyme-to-json": "^1.5.1",
     "eslint": "^3.19.0",
     "eslint-config-springload": "1.0.2",
     "eslint-plugin-import": "2.2.0",
     "eslint-plugin-jsx-a11y": "3.0.2",
     "eslint-plugin-react": "6.10.3",
-    "rackt-cli": "^0.5.4",
-    "react-addons-test-utils": "^15.0.1",
-    "react": "^15.0.1",
-    "react-dom": "^15.0.1"
+    "express": "^4.14.0",
+    "jest": "^19.0.2",
+    "node-sass": "^4.3.0",
+    "prop-types": "^15.5.8",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-test-renderer": "^15.5.4",
+    "webpack": "^1.13.3",
+    "webpack-dev-middleware": "^1.8.4",
+    "webpack-hot-middleware": "^2.13.2"
   },
   "dependencies": {
     "focus-trap": "^1.1.1"
