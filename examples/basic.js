@@ -2,58 +2,66 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import Modal from '../lib/index';
 
-const App = React.createClass({
+class App extends React.Component {
+    constructor(props) {
+        super(props);
 
-    getInitialState() {
-        return {
+        this.state = {
             modalIsOpen: false,
-            modalAltIsOpen: false
+            modalAltIsOpen: false,
         };
-    },
+    }
 
     openModal(item) {
         this.setState({
             [item]: true,
         });
-    },
+    }
+
 
     closeModal(item) {
         this.setState({
             [item]: false,
         });
-    },
+    }
 
     render() {
+        const { modalIsOpen, modalAltIsOpen } = this.state;
+
         return (
             <div>
                 <p>
-                    <a href="#" onClick={() => this.openModal('modalIsOpen')}>Open modal</a>
+                    <button onClick={() => this.openModal('modalIsOpen')}>
+                        Open modal
+                    </button>
                 </p>
                 <p>
-                    <a href="#" onClick={() => this.openModal('modalAltIsOpen')}>Open alternative modal</a>
+                    <button onClick={() => this.openModal('modalAltIsOpen')}>
+                        Open alternative modal
+                    </button>
                 </p>
                 <Modal
-                    isOpen={this.state.modalIsOpen}
+                    isOpen={modalIsOpen}
                     onRequestClose={() => this.closeModal('modalIsOpen')}
                     className={"modal--slideshow"}
                     overlayClick
                 >
                     <h2>Oh, hello!</h2>
-                    <a href="#">Link inside content</a>
+                    <a href="http://example.com/">Link inside content</a>
                 </Modal>
                 <Modal
-                    isOpen={this.state.modalAltIsOpen}
+                    isOpen={modalAltIsOpen}
                     onRequestClose={() => this.closeModal('modalAltIsOpen')}
                     className={"modal--slideshow"}
                     insideControls
                     overlayClick
                 >
                     <h2>Oh, hello!</h2>
-                    <a href="#">Link inside content</a>
+                    <a href="http://example.com/">Link inside content</a>
                 </Modal>
             </div>
         );
-    },
-});
+    }
+}
 
 ReactDOM.render(<App />, document.querySelector('[data-mount-basic]'));
