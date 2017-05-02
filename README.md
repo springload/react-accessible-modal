@@ -1,20 +1,14 @@
-# React accessible Modal
+# [react-accessible-modal](https://springload.github.io/react-accessible-modal/) [![npm](https://img.shields.io/npm/v/react-accessible-modal.svg?style=flat-square)](https://www.npmjs.com/package/react-accessible-modal) [![Build Status](https://travis-ci.org/springload/react-accessible-modal.svg?branch=master)](https://travis-ci.org/springload/react-accessible-modal) [![Coverage Status](https://coveralls.io/repos/github/springload/react-accessible-modal/badge.svg)]
 
-React accessible modal component
+> Accessible modal dialog component for React. Originally a fork of [reactjs/react-modal](https://github.com/reactjs/react-modal).
 
+Check out the [online demo](https://springload.github.io/react-accessible-modal/)!
 
-## Commands
+## Usage
 
-You need `rackt-cli v0.5.3` to execute some of these commands.
-
-- `npm install` install node dependencies
-- `npm start` run server
-- `npm test` run tests
-- `npm build` build component
-- `npm publish` publish component to npm (verify versions in package.json and bower.json)
-- `rackt pages` rebuild gh-pages branch
-- `rackt release` Publish a new release to npm. Use --preview to preview release.
-
+```sh
+npm install --save react-accessible-modal
+```
 
 ## Include your modal component
 
@@ -33,38 +27,52 @@ import Modal from 'react-accessible-modal';
 </Modal>
 ```
 
-## Example
+## Development
 
-You can find an example here: https://springload.github.io/react-accessible-modal/
+### Install
 
-## Contributing
 
-Have a look at [our contribution guidelines](CONTRIBUTING.md).
+> Clone the project on your computer, and install [Node](https://nodejs.org). This project also uses [nvm](https://github.com/creationix/nvm).
 
-### Releasing a new version
+```sh
+nvm install
+# Then, install all project dependencies.
+npm install
+# Install the git hooks.
+./.githooks/deploy
+```
 
-Use `rackt release`
+### Working on the project
 
-## LICENSE
+> Everything mentioned in the installation process should already be done.
 
-The MIT License (MIT)
+```sh
+# Make sure you use the right node version.
+nvm use
+# Start the server and the development tools.
+npm run start
+# Runs linting.
+npm run lint
+# Runs tests.
+npm run test
+# View other available commands with:
+npm run
+```
 
-Copyright (c) 2016 Springload
+### Releases
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+- Make a new branch for the release of the new version.
+- Update the [CHANGELOG](CHANGELOG.md).
+- Update the version number in `package.json`, following semver.
+- Make a PR and squash merge it.
+- Back on master with the PR merged, follow the instructions below.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+```sh
+npm run dist
+# Use irish-pub to check the package content. Install w/ npm install -g first.
+irish-pub
+npm publish
+```
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+- Finally, go to GitHub and create a release and a tag for the new version.
+- Done!
