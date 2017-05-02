@@ -1,3 +1,5 @@
 node_modules
 *.min.js
-**/lib/
+coverage/
+dist/
+pages

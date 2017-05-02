@@ -20,9 +20,12 @@
     "extends": "springload"
   },
   "devDependencies": {
-    "babel-eslint": "^4.1.6",
     "chai": "^3.4.0",
-    "escope": "3.3.0",
+    "eslint": "^3.19.0",
+    "eslint-config-springload": "1.0.2",
+    "eslint-plugin-import": "2.2.0",
+    "eslint-plugin-jsx-a11y": "3.0.2",
+    "eslint-plugin-react": "6.10.3",
     "rackt-cli": "^0.5.4",
     "react-addons-test-utils": "^15.0.1",
     "react": "^15.0.1",
