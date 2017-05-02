@@ -17,10 +17,10 @@ const App = React.createClass({
       <div className="example">
         <h1>React Modal example</h1>
         <p>
-          <a onClick={() => this.openModal('modalIsOpen')}>Open modal</a>
+          <a href="#" onClick={() => this.openModal('modalIsOpen')}>Open modal</a>
         </p>
         <p>
-          <a onClick={() => this.openModal('modalAltIsOpen')}>Open alternative modal</a>
+          <a href="#" onClick={() => this.openModal('modalAltIsOpen')}>Open alternative modal</a>
         </p>
         <Modal
           isOpen={this.state.modalIsOpen}
@@ -30,7 +30,8 @@ const App = React.createClass({
         >
           <div className="modal__slideshow-inner">
             <div className="modal__slideshow-wrapper">
-              <h1>Oh, hello!</h1>
+              <h2>Oh, hello!</h2>
+              <a href="#">Link inside content</a>
             </div>
           </div>
         </Modal>
@@ -43,7 +44,8 @@ const App = React.createClass({
         >
           <div className="modal__slideshow-inner">
             <div className="modal__slideshow-wrapper">
-              <h1>Oh, hello!</h1>
+              <h2>Oh, hello!</h2>
+              <a href="#">Link inside content</a>
             </div>
           </div>
         </Modal>
