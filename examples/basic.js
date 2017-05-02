@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Modal from '../../lib/index';
+import Modal from '../lib/index';
 
 
 const App = React.createClass({
@@ -60,4 +60,4 @@ const App = React.createClass({
 
 });
 
-ReactDOM.render(<App/>, document.getElementById('container'));
+ReactDOM.render(<App/>, document.querySelector('[data-mount-basic]'));
