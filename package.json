@@ -62,7 +62,6 @@
     "eslint-plugin-react": "6.10.3",
     "express": "^4.14.0",
     "jest": "^19.0.2",
-    "node-sass": "^4.3.0",
     "prop-types": "^15.5.8",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
@@ -80,8 +79,7 @@
   "scripts": {
     "start": "webpack-dev-server --config=webpack/webpack.config.dev.js",
     "js": "babel -d dist lib",
-    "css": "echo 'not implemented'",
-    "dist": "npm run js -s && npm run css -s",
+    "dist": "npm run js -s",
     "linter:js": "eslint",
     "lint": "npm run linter:js -s -- .",
     "test": "jest",
