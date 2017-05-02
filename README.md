@@ -1,4 +1,4 @@
-# [react-accessible-modal](https://springload.github.io/react-accessible-modal/) [![npm](https://img.shields.io/npm/v/react-accessible-modal.svg?style=flat-square)](https://www.npmjs.com/package/react-accessible-modal) [![Build Status](https://travis-ci.org/springload/react-accessible-modal.svg?branch=master)](https://travis-ci.org/springload/react-accessible-modal) [![Coverage Status](https://coveralls.io/repos/github/springload/react-accessible-modal/badge.svg)]
+# [react-accessible-modal](https://springload.github.io/react-accessible-modal/) [![npm](https://img.shields.io/npm/v/react-accessible-modal.svg?style=flat-square)](https://www.npmjs.com/package/react-accessible-modal) [![Build Status](https://travis-ci.org/springload/react-accessible-modal.svg?branch=master)](https://travis-ci.org/springload/react-accessible-modal) [![Coverage Status](https://coveralls.io/repos/github/springload/react-accessible-modal/badge.svg)](https://coveralls.io/github/springload/react-accessible-modal)
 
 > Accessible modal dialog component for React. Originally a fork of [reactjs/react-modal](https://github.com/reactjs/react-modal).
 
