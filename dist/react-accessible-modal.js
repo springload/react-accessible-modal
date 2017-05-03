@@ -357,15 +357,19 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        var controlsMarkup = undefined;
 	
-	        // if (controls) {
-	        //     controlsMarkup = controls;
-	        // } else {
-	        //     controlsMarkup = (
-	        //         <div className={`modal__control${insideControls ? ' modal__control--inside' : ''}`}>
-	        //             <div className="modal__control-item modal__close" role="button" tabIndex="0" onClick={this.requestClose} tabIndex="0">×</div>
-	        //         </div>
-	        //     );
-	        // }
+	        if (controls) {
+	            controlsMarkup = controls;
+	        } else {
+	            controlsMarkup = _react2['default'].createElement(
+	                'div',
+	                { className: 'modal__control' + (insideControls ? ' modal__control--inside' : '') },
+	                _react2['default'].createElement(
+	                    'div',
+	                    { className: 'modal__control-item modal__close', role: 'button', tabIndex: '0', onClick: this.requestClose, tabIndex: '0' },
+	                    '×'
+	                )
+	            );
+	        }
 	
 	        if (className) {
 	            classList.push(className);

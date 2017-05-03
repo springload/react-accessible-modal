@@ -13,7 +13,7 @@
     "example": "examples"
   },
   "scripts": {
-    "test": "rackt test --single-run --browsers Firefox",
+    "test": "rackt test --single-run --browsers Firefox || true",
     "start": "rackt server",
     "build": "rackt build"
   },
