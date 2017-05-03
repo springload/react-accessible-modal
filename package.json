@@ -27,12 +27,12 @@
     "chai": "^3.4.0",
     "escope": "3.3.0",
     "rackt-cli": "^0.5.4",
-    "react": "^15.0.1",
-    "react-addons-test-utils": "^15.0.1",
-    "react-dom": "^15.0.1"
+    "react-addons-test-utils": "^15.0.1"
   },
   "dependencies": {
-    "focus-trap": "^1.1.1"
+    "focus-trap": "^1.1.1",
+    "react": "^15.0.1",
+    "react-dom": "^15.0.1"
   },
   "peerDependencies": {
     "react": "^0.14.7 || ^15.0.1 || ^15.1.0",
