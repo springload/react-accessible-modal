@@ -28,12 +28,8 @@ const App = React.createClass({
           className={"modal--slideshow"}
           overlayClick
         >
-          <div className="modal__slideshow-inner">
-            <div className="modal__slideshow-wrapper">
-              <h2>Oh, hello!</h2>
-              <a href="#">Link inside content</a>
-            </div>
-          </div>
+            <h2>Oh, hello!</h2>
+            <a href="#">Link inside content</a>
         </Modal>
         <Modal
           isOpen={this.state.modalAltIsOpen}
@@ -42,12 +38,8 @@ const App = React.createClass({
           insideControls
           overlayClick
         >
-          <div className="modal__slideshow-inner">
-            <div className="modal__slideshow-wrapper">
-              <h2>Oh, hello!</h2>
-              <a href="#">Link inside content</a>
-            </div>
-          </div>
+            <h2>Oh, hello!</h2>
+            <a href="#">Link inside content</a>
         </Modal>
       </div>
     );
