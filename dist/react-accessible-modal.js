@@ -186,6 +186,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        this.closeButton = modal.querySelector('.modal__close');
 	
+	        if (!this.closeButton) {
+	            console.warn('You need to add .modal__class to your close button if you are setting your own control markup');
+	        }
+	
 	        // make sure we're listening to the modals animationEvent
 	        if (e) {
 	            var target = e.target || e.srcElement;
@@ -203,7 +207,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	        this.setState({ afterOpen: true }, function () {
 	            window.addEventListener('keydown', _this.handleEscapeKeyDown);
-	            _this.closeButton.addEventListener('keydown', _this.handleEnterKeyDown);
+	            if (_this.closeButton) _this.closeButton.addEventListener('keydown', _this.handleEnterKeyDown);
 	            if (_this.props.onAfterOpen) {
 	                _this.props.onAfterOpen();
 	            }
@@ -268,7 +272,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        document.body.classList.remove(bodyActiveClass);
 	        _focusTrap2['default'].deactivate(this.refs.modal);
 	        window.removeEventListener('keydown', this.handleEscapeKeyDown);
-	        this.closeButton.removeEventListener('keydown', this.handleEnterKeyDown);
+	        if (this.closeButton) this.closeButton.removeEventListener('keydown', this.handleEnterKeyDown);
 	    },
 	
 	    afterClose: function afterClose() {
@@ -313,13 +317,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var ariaHideApp = this.props.ariaHideApp;
 	        var content = this.refs.content;
 	
-	        if (!ariaHideApp) {
-	            return;
-	        }
+	        if (!ariaHideApp) return;
 	
-	        if (!content) {
-	            return;
-	        }
+	        if (!content) return;
 	
 	        content.setAttribute('aria-hidden', isHidden);
 	
