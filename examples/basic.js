@@ -43,7 +43,7 @@ class App extends React.Component {
                 <Modal
                     isOpen={modalIsOpen}
                     onRequestClose={() => this.closeModal('modalIsOpen')}
-                    className={"modal--slideshow"}
+                    className="modal--slideshow"
                     overlayClick
                 >
                     <h2>Oh, hello!</h2>
@@ -52,7 +52,7 @@ class App extends React.Component {
                 <Modal
                     isOpen={modalAltIsOpen}
                     onRequestClose={() => this.closeModal('modalAltIsOpen')}
-                    className={"modal--slideshow"}
+                    className="modal--slideshow"
                     insideControls
                     overlayClick
                 >
