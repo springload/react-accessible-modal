@@ -4,14 +4,22 @@
 
 ## Unreleased
 
+## [[v2.0.0]](https://github.com/springload/react-accessible-modal/releases/tag/v2.0.0)
+
+### Added
+
+- Add `prop-types` as peerDependency.
+
 ### Changed
 
-- Convert all code to be compatible with React 15.5.
-- Update peerDependencies to reflect dependency on `prop-types`.
+- Convert all code to be compatible with React 15.5 and React 16.
 
 ### Removed
 
 - Remove animationend vendor prefixing.
+- Remove support for React 0.14.7, 0.14.8, 15.1, 15.2.
+- Remove UMD build.
+- Start compiling only for latest browser versions and IE11.
 
 ## [[v1.1.1]](https://github.com/springload/react-accessible-modal/releases/tag/v1.1.1)
 
