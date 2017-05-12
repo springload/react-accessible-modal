@@ -1,54 +1,51 @@
-v1.1.4 - Wed, 03 May 2017 02:39:59 GMT
---------------------------------------
+# Changelog
 
-- 
+> All notable changes to this project are documented in this file. This project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
+## Unreleased
 
-v1.1.3 - Wed, 03 May 2017 01:49:32 GMT
---------------------------------------
+### Changed
 
-- 
+- Convert all code to be compatible with React 15.5.
+- Update peerDependencies to reflect dependency on `prop-types`.
 
+### Removed
 
-v1.1.2 - Wed, 03 May 2017 01:49:15 GMT
---------------------------------------
+- Remove animationend vendor prefixing.
 
-- 
+## [[v1.1.1]](https://github.com/springload/react-accessible-modal/releases/tag/v1.1.1)
 
+## [[v1.1.0]](https://github.com/springload/react-accessible-modal/releases/tag/v1.1.0)
 
-v0.2.2 - Fri, 27 May 2016 03:40:19 GMT
---------------------------------------
+### Added
 
-- 
+- Add option to move close button position inside the modal content
 
+## [[v1.0.0]](https://github.com/springload/react-accessible-modal/releases/tag/v1.0.0)
 
-v0.2.0 - Tue, 03 May 2016 14:14:23 GMT
---------------------------------------
+## [[v0.2.0]](https://github.com/springload/react-accessible-modal/releases/tag/v0.2.0)
 
-- 
+### Fixed
 
-
-v0.1.0 - Thu, 21 Apr 2016 20:52:59 GMT
---------------------------------------
-
-- 
+- Fixes a bug where modals would not clean up after themselves when unmounted.
 
 
-v0.0.5 - Wed, 24 Feb 2016 02:51:03 GMT
---------------------------------------
+## [[v0.1.0]](https://github.com/springload/react-accessible-modal/releases/tag/v0.1.0)
 
-- 
+First usable release!
 
+-------------
 
-v0.0.4 - Sat, 20 Feb 2016 00:47:44 GMT
---------------------------------------
+Template from http://keepachangelog.com/
 
-- 
+## [[vx.y.z]](https://github.com/springload/react-accessible-modal/releases/tag/x.y.z)
 
+### Added
 
-v0.0.3 - Sat, 20 Feb 2016 00:47:24 GMT
---------------------------------------
+- Something was added to the API / a new feature was introduced.
 
-- 
+### Changed
 
+### Fixed
 
+### Removed
