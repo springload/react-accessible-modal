@@ -73,9 +73,9 @@
     "focus-trap": "^1.1.1"
   },
   "peerDependencies": {
-    "prop-types": "^15.5.8",
-    "react": "^0.14.9 || ^15.3.0",
-    "react-dom": "^0.14.9 || ^15.3.0"
+    "prop-types": "^15.5.8 || ^16.0.0",
+    "react": "^0.14.9 || ^15.3.0 || ^16.0.0",
+    "react-dom": "^0.14.9 || ^15.3.0 || ^16.0.0"
   },
   "scripts": {
     "start": "webpack-dev-server --config=webpack/webpack.config.dev.js",
